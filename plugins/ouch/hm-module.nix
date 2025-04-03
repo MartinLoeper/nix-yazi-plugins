@@ -12,7 +12,7 @@
 
   config = { cfg, setKeys, mkRuntimeDeps, ... }:
     _: {
-      runtimeDependencies = mkRuntimeDeps [ cfg.pkgs.ouch ];
+      runtimeDependencies = (mkRuntimeDeps { pkgs = [ cfg.pkgs.ouch ] });
 
       # Apply the key mappings
       inherit (setKeys cfg.keys)
