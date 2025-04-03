@@ -1,6 +1,6 @@
 {
   options = { mkKeyOption, ... }:
-    { pkgs, ... }: {
+    _: {
       keys = {
         compress = mkKeyOption {
           on = [ "C" ];
@@ -8,7 +8,14 @@
           desc = "Compress with ouch";
         };
       };
-      runtimeDeps = [ pkgs.ouch ];
     };
-  config = { cfg, setKeys, ... }: _: (setKeys cfg.keys);
+
+  config = { cfg, setKeys, mkRuntimeDeps, pkgs, ... }:
+    _: {
+      runtimeDependencies = mkRuntimeDeps [ pkgs.ouch ];
+
+      # Apply the key mappings
+      inherit (setKeys cfg.keys)
+      ;
+    };
 }
