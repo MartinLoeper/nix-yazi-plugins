@@ -1,6 +1,6 @@
 {
-  options = { pkgs, mkKeyOption, ... }:
-    _: {
+  options = { mkKeyOption, ... }:
+    { pkgs, ... }: {
       keys = {
         compress = mkKeyOption {
           on = [ "C" ];
