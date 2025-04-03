@@ -10,9 +10,9 @@
       };
     };
 
-  config = { cfg, setKeys, mkRuntimeDeps, pkgs, ... }:
+  config = { cfg, setKeys, mkRuntimeDeps, ... }:
     _: {
-      runtimeDependencies = mkRuntimeDeps [ pkgs.ouch ];
+      runtimeDependencies = mkRuntimeDeps pkgs: [ pkgs.ouch ];
 
       # Apply the key mappings
       inherit (setKeys cfg.keys)
