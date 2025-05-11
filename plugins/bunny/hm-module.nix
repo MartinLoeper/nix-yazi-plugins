@@ -16,12 +16,14 @@
       (setKeys cfg.keys)
       {
         programs.yazi.yaziPlugins.require."bunny" = {
+          notify = true;
           hops = [
             { 
               key = "/";
               path = "/";
             }
-            { key = "t";
+            { 
+              key = "t";
               path = "/tmp";
             }
           ];
