@@ -4,17 +4,23 @@
     { lib, ... }:
     {
       keys = {
-        left = mkKeyOption {
-          on = [ "l" ];
-          run = "plugin bypass smart_enter";
-          desc = "Open a file, or recursively enter child directory, skipping children with only a single subdirectory";
-        };
-        right = mkKeyOption {
-          on = [ "h" ];
-          run = "plugin bypass reverse";
-          desc = "Recursively enter parent directory, skipping parents with only a single subdirectory";
+        open_bookmark = mkKeyOption {
+          on = [ "'" ];
+          run = "plugin bunny";
+          desc = "Goto bookmarked folder";
         };
       };
     };
-  config = { cfg, setKeys, ... }: { config, lib, ... }: { } // (setKeys cfg.keys);
+  config = { cfg, setKeys, ... }: { config, lib, ... }: 
+    lib.mkMerge [
+      (setKeys cfg.keys)
+      {
+        programs.yazi.yaziPlugins.require."bunny" = {
+          hops = {
+            { key = "/",          path = "/",                                    },
+            { key = "t",          path = "/tmp",                                 },
+          };
+        };
+      }
+    ];
 }
