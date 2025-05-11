@@ -17,7 +17,7 @@ stdenv.mkDerivation {
 
   buildPhase = ''
     mkdir $out
-    cp $src/* $out
+    cp $src/main.lua $out/main.lua
   '';
 
   meta = with lib; {
