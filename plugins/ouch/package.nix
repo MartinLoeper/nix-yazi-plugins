@@ -7,8 +7,8 @@ stdenv.mkDerivation {
   src = fetchFromGitHub {
     owner = "ndtoan96";
     repo = "ouch.yazi";
-    rev = "558188d2479d73cafb7ad8fb1bee12b2b59fb607";
-    hash = "sha256-7X8uAiJ8vBXYBXOgyKhVVikOnTBGrdCcXOJemjQNolI=";
+    rev = "2496cd9ac2d1fb52597b22ae84f3af06c826a86d";
+    hash = "sha256-7X8uAiJ8vBXYBXOgyKhVVikOnTBGrdCeXOJemjQNolI=";
   };
 
   buildPhase = ''
