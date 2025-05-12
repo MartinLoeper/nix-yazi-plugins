@@ -23,6 +23,10 @@
               path = "/";
             }
             { 
+              key = "h";
+              path = "/home/mloeper/";
+            }
+            { 
               key = "s";
               path = "/home/mloeper/Pictures/Screenshots/";
             }
