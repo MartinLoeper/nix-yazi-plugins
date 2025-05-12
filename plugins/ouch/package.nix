@@ -8,7 +8,7 @@ stdenv.mkDerivation {
     owner = "ndtoan96";
     repo = "ouch.yazi";
     rev = "2496cd9ac2d1fb52597b22ae84f3af06c826a86d";
-    hash = "sha256-7X8uAiJ8vBXYBXOgyKhVVikOnTBGrdCeXOJemjQNolI=";
+    hash = "sha256-OsNfR7rtnq+ceBTiFjbz+NFMSV/6cQ1THxEFzI4oPJk=";
   };
 
   buildPhase = ''
