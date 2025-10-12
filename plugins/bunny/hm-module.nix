@@ -31,6 +31,14 @@
               path = "/home/mloeper/Pictures/Screenshots/";
             }
             { 
+              key = "v";
+              path = "/home/mloeper/Videos/";
+            }
+            { 
+              key = "d";
+              path = "/home/mloeper/Downloads";
+            }
+            { 
               key = "t";
               path = "/tmp";
             }
