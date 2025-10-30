@@ -42,6 +42,10 @@
               key = "t";
               path = "/tmp";
             }
+            { 
+              key = "f";
+              path = "/home/mloeper/repos/mloeper/glinq-os/home/files";
+            }
           ];
         };
       }
