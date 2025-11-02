@@ -45,14 +45,14 @@
             { 
               key = "f";
               path = "/home/mloeper/repos/mloeper/glinq-os/home/files";
-            },
+            }
             {
-              key = "r",
-              path = "/home/mloeper/nesto/repos"
-            },
+              key = "r";
+              path = "/home/mloeper/nesto/repos";
+            }
             {
-              key = "p",
-              path = "/home/mloeper/repos"
+              key = "p";
+              path = "/home/mloeper/repos";
             }
           ];
         };
