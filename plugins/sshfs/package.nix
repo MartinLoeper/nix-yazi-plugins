@@ -12,7 +12,7 @@ stdenv.mkDerivation {
     owner = "uhs-robert";
     repo = "sshfs.yazi";
     rev = "2728b14da2dff86b93aed9e04c45c60d5a06bdcd";
-    sha256 = "sha256-enIt79UvQnKJalBtzSEdUkjNHjNJusUWC4L6QFb3Ou4=";
+    sha256 = "sha256-KYO5h+yl2kpzWFt8OyGkfvW/I6XsSv4E/wB7PrgD6AA=";
   };
 
   buildPhase = ''
