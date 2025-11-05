@@ -10,5 +10,17 @@
         };
       };
     };
-  config = { cfg, setKeys, ... }: _: (setKeys cfg.keys);
+  config =
+    {
+      cfg,
+      setKeys,
+      ...
+    }:
+    { lib, ... }:
+    lib.mkMerge [
+      (setKeys cfg.keys)
+      {
+        programs.yazi.yaziPlugins.require.sshfs = { };
+      }
+    ];
 }
