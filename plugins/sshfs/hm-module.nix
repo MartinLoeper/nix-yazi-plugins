@@ -4,7 +4,7 @@
     _: {
       keys = {
         toggle = mkKeyOption {
-          on = [ "M" "s" ];
+          on = [ "M" ];
           run = "plugin sshfs -- menu";
           desc = "Open SSHFS options";
         };
