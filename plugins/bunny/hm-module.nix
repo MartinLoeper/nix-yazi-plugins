@@ -54,6 +54,10 @@
               key = "p";
               path = "/home/mloeper/repos";
             }
+            {
+              key = "m";
+              path = "/run/media/mloeper";
+            }
           ];
         };
       }
