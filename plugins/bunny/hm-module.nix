@@ -9,6 +9,11 @@
           run = "plugin bunny";
           desc = "Goto bookmarked folder";
         };
+        open_bookmark_fuzzy = mkKeyOption {
+          on = [ "\"" ];
+          run = "plugin bunny fuzzy";
+          desc = "Search bookmarked folder";
+        };
       };
     };
   config = { cfg, setKeys, ... }: { config, lib, ... }: 
