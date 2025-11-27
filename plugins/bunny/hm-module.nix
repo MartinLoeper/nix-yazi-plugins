@@ -64,12 +64,12 @@
               desc = "GLINQ Files";
             }
             {
-              key = { "c", "n" };
+              key = [ "c", "n" ];
               path = "/home/mloeper/nesto/repos";
               desc = "Nesto Code";
               }
             {
-              key = { "c", "p" };
+              key = [ "c", "p" ];
               path = "/home/mloeper/repos";
               desc = "My Code";
             }
