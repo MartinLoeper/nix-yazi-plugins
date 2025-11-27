@@ -49,9 +49,9 @@
               desc = "Downloads";
             }
             { 
-              key = "Pictures";
+              key = "p";
               path = "/home/mloeper/Pictures";
-              desc = "Downloads";
+              desc = "Pictures";
             }
             { 
               key = "t";
