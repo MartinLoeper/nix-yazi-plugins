@@ -6,13 +6,13 @@
 
 stdenv.mkDerivation {
   pname = "yaziPlugins-bunny";
-  version = "1.2.0";
+  version = "1.3.2";
 
   src = fetchFromGitHub {
     owner = "stelcodes";
     repo = "bunny.yazi";
-    rev = "1062775fb28cdb021a8c287a962f648a73b10128";
-    sha256 = "sha256-2HnMxiXpU0tD2RrljlRs8GEwNP4zNCu89F5bt9SQE+Y=";
+    rev = "a0b4e18112839f2a38dc391f6f266e3a25a8bcf5";
+    sha256 = "sha256-2HnMxiXpU0tD2RrljlRs8GEwNP4zNCu89F5bt9SeE+Y=";
   };
 
   buildPhase = ''
