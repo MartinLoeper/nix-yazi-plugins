@@ -12,7 +12,7 @@ stdenv.mkDerivation {
     owner = "stelcodes";
     repo = "bunny.yazi";
     rev = "a0b4e18112839f2a38dc391f6f266e3a25a8bcf5";
-    sha256 = "sha256-2HnMxiXpU0tD2RrljlRs8GEwNP4zNCu89F5bt9SeE+Y=";
+    sha256 = "sha256-HnzuR12c4wJaI7dzZrf/Zdc6yCjvsfhPEcnzNNgcLnA";
   };
 
   buildPhase = ''
