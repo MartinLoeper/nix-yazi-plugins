@@ -11,7 +11,7 @@
     flake-utils-plus.inputs.flake-utils.follows = "flake-utils";
 
     # The list of supported systems.
-    systems.url = "github:nix-systems/default-linux";
+    systems.url = "github:nix-systems/default";
 
     # Haumea for directory-defined attrset loading
     haumea.url = "github:nix-community/haumea/v0.2.2";
@@ -48,7 +48,8 @@
         # -> bypass = ...
         CondRaiseAttrs = n: set: mapAttrs (_n: v: v."${n}") (filterAttrs (_n: v: v ? "${n}") set);
 
-        packages = (CondRaiseAttrs "package" YaziPlugins);
+        packages = if (pkgs ? yaziPlugins) then pkgs.yaziPlugins // packagesOurs else packagesOurs;
+        packagesOurs = (CondRaiseAttrs "package" YaziPlugins);
 
         homeManagerModulesRaised = (CondRaiseAttrs "hm-module" YaziPlugins);
         homeManagerModulesImports = (
@@ -57,14 +58,28 @@
             { config, lib, ... }:
             let
               cfg = config.programs.yazi.yaziPlugins.plugins.${v.name};
+              mkModuleArg =
+                args:
+                (import ./lib.nix {
+                  baseOptionPath = [
+                    "programs"
+                    "yazi"
+                    "yaziPlugins"
+                    "plugins"
+                    v.name
+                  ];
+                } args)
+                // {
+                  inherit cfg;
+                };
             in
             {
               imports = (
                 filter (v: v != { }) [
                   (
-                    inputs:
-                    lib.mkIf (cfg.enable && inputs.config.programs.yazi.yaziPlugins.enable) (
-                      v.config ({ inherit cfg; } // (import ./lib.nix inputs)) inputs
+                    { pkgs, ... }@args:
+                    lib.mkIf (cfg.enable && args.config.programs.yazi.yaziPlugins.enable) (
+                      v.config (mkModuleArg args) args
                     )
                   )
                   (_: {
@@ -83,11 +98,21 @@
                     };
                   })
                   (_: {
+                    config = lib.mkIf (cfg.enable && cfg ? "preRequire") {
+                      programs.yazi.yaziPlugins.preRequire = cfg.preRequire;
+                    };
+                  })
+                  (_: {
+                    config = lib.mkIf (cfg.enable && cfg ? "postRequire") {
+                      programs.yazi.yaziPlugins.postRequire = cfg.postRequire;
+                    };
+                  })
+                  (_: {
                     config = lib.mkIf (cfg.enable && cfg ? "extraConfig" && cfg.extraConfig != "") {
                       programs.yazi.yaziPlugins.extraConfig = cfg.extraConfig;
                     };
                   })
-                  (inputs: (v.options ({ inherit cfg; } // (import ./lib.nix inputs))) inputs)
+                  ({ pkgs, ... }@args: v.options (mkModuleArg args) args)
                   (
                     { pkgs, ... }:
                     {
@@ -95,7 +120,11 @@
                         package = mkOption {
                           type = lib.types.nullOr lib.types.package;
                           description = "The ${v.name} package to use";
-                          default = self.packages.${pkgs.system}.${v.name};
+                          #TODO document this
+                          #default = (pkgs.yaziPlugins.${v.name} or self.packages.${pkgs.system}.${v.name});
+                          default =
+                            inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.yaziPlugins.${v.name}
+                              or self.packages.${pkgs.stdenv.hostPlatform.system}.${v.name};
                         };
                         enable = mkEnableOption v.name;
                         extraConfig = mkOption {
@@ -167,10 +196,9 @@
           pkgs = channels.nixpkgs;
           lib = inputs.nixpkgs.lib;
           instance = (instantiate_lib lib pkgs);
-          inherit (pkgs) system;
         in
         {
-          formatter = pkgs.nixfmt-rfc-style;
+          formatter = pkgs.nixfmt-tree;
           inherit (instance) packages;
           legacyPackages = {
             homeManagerModules = rec {
@@ -178,7 +206,7 @@
                 { lib, ... }:
                 {
                   imports =
-                    ((instantiate_lib lib (inputs.nixpkgs.legacyPackages.${system})).homeManagerModulesImports)
+                    ((instantiate_lib lib (inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system})).homeManagerModulesImports)
                     ++ [ ./module.nix ];
                 };
               default = yaziPlugins;

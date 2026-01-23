@@ -1,23 +1,57 @@
+# Plugin-specific info to customize library function
+{ baseOptionPath, ... }:
+# General inputs of the module this is used in
 { lib, ... }:
 let
-  inherit (lib) mkOption isList;
-  inherit (lib.types) submodule str either listOf;
-in {
+  inherit (lib)
+    mkOption
+    isList
+    showOption
+    setAttrByPath
+    filterAttrs
+    mapAttrsToList
+    ;
+  inherit (lib.types)
+    submodule
+    str
+    either
+    listOf
+    package
+    ;
+in
+{
   setKeys = keys: {
     programs.yazi.keymap.mgr.prepend_keymap =
-      lib.mapAttrsToList (_: key: { inherit (key) on run desc; }) keys;
+      mapAttrsToList
+        (_: key: {
+          inherit (key) on run desc;
+        })
+        # `key` may be null due to mkMovedOption.
+        # `key.on` may be empty if the keybind shouldn't be used.
+        (filterAttrs (_: key: key != null && key.on != [ ]) keys);
   };
   mkRuntimeDeps = { pkgs }:
     mkOption {
-      type =
-        lib.types.listOf (lib.types.either lib.types.package lib.types.str);
+      type = listOf (either package str);
       description = ''
         Additional runtime packages to add
         to deactivate overlaying `lib.mkForce []` the parent option
       '';
       default = pkgs;
     };
-  mkKeyOption = { on, run, desc, }:
+  mkDisableOption =
+    description:
+    mkOption {
+      default = true;
+      type = lib.types.bool;
+      inherit description;
+    };
+  mkKeyOption =
+    {
+      on,
+      run,
+      desc,
+    }:
     mkOption {
       description = desc;
       type = either (submodule {
@@ -30,7 +64,6 @@ in {
             type = str;
             default = run;
           };
-
           desc = mkOption {
             type = str;
             default = desc;
@@ -45,5 +78,21 @@ in {
         } else
           old;
     };
-
+  # Based on nixpkgs's lib.mkRemovedOptionModule but adapted to work in our
+  # non-standard way of setting options (works without using module imports)
+  mkMovedOption =
+    extraBaseOptionPath: oldName: newName:
+    let
+      baseOptionPath' = baseOptionPath ++ extraBaseOptionPath;
+    in
+    setAttrByPath (extraBaseOptionPath ++ oldName) (mkOption {
+      visible = false;
+      default = null;
+      apply =
+        x:
+        lib.throwIf (x != null) "The option `${
+          showOption (baseOptionPath' ++ oldName)
+        }' has been renamed to '${showOption (baseOptionPath' ++ newName)}'" null;
+    });
+  recursiveUpdateList = lib.fold lib.recursiveUpdate { };
 }

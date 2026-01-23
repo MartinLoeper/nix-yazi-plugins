@@ -1,6 +1,10 @@
 # [Yazi](https://yazi-rs.github.io/) plugins, packaged for Nix
 This is a collection of nix packages containing plugins for the Yazi TUI file manager.
 
+## Upstream Packages
+Quite Recently NixOS added yaziPlugins upstream. For this reason some packages were removed.
+The Home-Manager Integration (see below) prefers the upstream over this repositories packages, as it is assumed that nixpkgs is more stable
+
 ## Usage
 In your `flake.nix`, add an input like so:
 ```nix
@@ -19,6 +23,11 @@ There's also an overlay which will give you the packages under `pkgs.yaziPlugins
 The plugin packages provided by this flake can be used with the home-manager module for Yazi, see [`programs.yazi.plugins`](https://nix-community.github.io/home-manager/options.xhtml#opt-programs.yazi.plugins).
 
 ### Home Manager Integration
+> [!NOTE]
+> for some plugins only packages are available. just use
+> ```programs.yazi.plugins = with pkgs.yaziPlugins; {inherit pluginname;}; ```
+> Note that this will not add runtime dependencies or require the plugins in Yazi's init.lua (which is not always needed)
+
 Easily enable plugins, a sensible default is already preconfigured.
 The init.lua, your keymaps, dependencies, plugins directory, ... are automatically managed for you
 example usage inside home-manager:
@@ -63,17 +72,22 @@ If you run the release version, use the corresponding branch, for example `yazi-
 | `copy-file-contents` | Copy the contents of a file to clipboard directly from Yazi | https://github.com/AnirudhG07/plugins-yazi/tree/main/copy-file-contents.yazi |
 | `exifaudio` | Preview audio files metadata on yazi | https://github.com/Sonico98/exifaudio.yazi |
 | `full-border` | Add a full border to Yazi to make it look fancier | https://github.com/yazi-rs/plugins/tree/main/full-border.yazi|
+| `git` | Show the status of Git file changes as linemode in the file list | https://github.com/yazi-rs/plugins/tree/main/git.yazi|
 | `glow` | Plugin for Yazi to preview markdown files with glow | https://github.com/Reledia/glow.yazi |
 | `hide-preview` | Switch the preview pane between hidden and shown | https://github.com/yazi-rs/plugins/tree/main/hide-preview.yazi |
 | `jump-to-char` | Vim-like f<char>, jump to the next file whose name starts with <char> | https://github.com/yazi-rs/plugins/tree/main/jump-to-char.yazi |
 | `max-preview` | Maximize or restore the preview pane | https://github.com/yazi-rs/plugins/tree/main/max-preview.yazi |
 | `open-with-cmd` | This is a Yazi plugin for opening files with a prompted command. | https://github.com/Ape/open-with-cmd.yazi |
 | `ouch` | A Yazi plugin to preview archives | https://github.com/ndtoan96/ouch.yazi |
+| `recycle-bin` | Comprehensive trash management for Yazi with browse, restore, and delete capabilities | https://github.com/uhs-robert/recycle-bin.yazi |
 | `relative-motions` | basic vim motions like 3k, 12j, 10gg | https://github.com/dedukun/relative-motions.yazi |
 | `rich-preview` | Rich preview plugin for yazi file manager | https://github.com/AnirudhG07/rich-preview.yazi |
+| `smart-enter` | Open files or enter directories all in one key! | https://github.com/yazi-rs/plugins/tree/main/smart-enter.yazi |
 | `smart-filter` | A Yazi plugin that makes filters smarter: continuous filtering, automatically enter unique directory, open file on submitting | https://github.com/yazi-rs/plugins/tree/main/smart-filter.yazi |
 | `starship` | Show starship prompt in header | https://github.com/Rolv-Apneseth/starship.yazi |
 | `system-clipboard` | Cross platform implementation of a simple system clipboard for yazi file manager | https://github.com/orhnk/system-clipboard.yazi |
+| `torrent-preview` | A Yazi plugin for previewing BitTorrent files | https://github.com/kirasok/torrent-preview.yazi |
+| `whossh` |A lightning-fast, keyboard-first bookmark manager for Yazi| https://gitlab.com/WhoSowSee/whoosh.yazi |
 
 ## Contributing
 To request a new plugin or an update to an existing one, you can open an issue.
