@@ -94,6 +94,11 @@
               desc = "USB Mounts";
             }
             {
+              key = [ "m" "u" ];
+              path = "/home/mloeper/Music";
+              desc = "USB Mounts";
+            }
+            {
               key = [ "v" ];
               path = "/mnt/vms";
               desc = "VMs";
