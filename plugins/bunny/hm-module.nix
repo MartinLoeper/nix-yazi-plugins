@@ -96,7 +96,7 @@
             {
               key = [ "m" "u" ];
               path = "/home/mloeper/Music";
-              desc = "USB Mounts";
+              desc = "Music";
             }
             {
               key = [ "v" ];
