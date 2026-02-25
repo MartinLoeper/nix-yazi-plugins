@@ -39,7 +39,7 @@
               desc = "Screenshots";
             }
             { 
-              key = "v";
+              key = [ "v" "i" ];
               path = "/home/mloeper/Videos/";
               desc = "Videos";
             }
@@ -99,7 +99,7 @@
               desc = "Music";
             }
             {
-              key = [ "v" ];
+              key = [ "v" "m" ];
               path = "/mnt/vms";
               desc = "VMs";
             }
