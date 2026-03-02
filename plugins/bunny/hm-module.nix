@@ -29,6 +29,11 @@
               desc = "Root";
             }
             { 
+              key = "o";
+              path = "/home/mloeper/obsidian/nesto/.obsidian";
+              desc = "Obsidian";
+            }
+            { 
               key = "h";
               path = "/home/mloeper/";
               desc = "Home";
