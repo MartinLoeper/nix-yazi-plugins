@@ -30,7 +30,7 @@
             }
             { 
               key = "o";
-              path = "/home/mloeper/obsidian/nesto/.obsidian";
+              path = "/home/mloeper/obsidian/nesto";
               desc = "Obsidian";
             }
             { 
