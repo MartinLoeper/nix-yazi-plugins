@@ -118,11 +118,6 @@
               path = "/mnt/vms/nixos-dev/shared";
               desc = "NixOS VM";
             }
-            {
-              key = [ "r" "b" ];
-              path = "sftp://berta";
-              desc = "Berta (SFTP)";
-            }
           ];
         };
       }
