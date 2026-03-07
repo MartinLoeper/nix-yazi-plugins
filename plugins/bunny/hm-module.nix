@@ -94,6 +94,11 @@
               desc = "Mounts";
             }
             {
+              key = [ "m" "c" ];
+              path = "/home/mloeper/mnt/openclaw";
+              desc = "OpenClaw";
+            }
+            {
               key = [ "m" "e" ];
               path = "/run/media/mloeper";
               desc = "USB Mounts";
