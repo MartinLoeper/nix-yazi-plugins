@@ -39,6 +39,11 @@
               desc = "Home";
             }
             { 
+              key = "k";
+              path = "/home/mloeper/.ssh";
+              desc = "SSH (keys)";
+            }
+            { 
               key = "s";
               path = "/home/mloeper/Pictures/Screenshots/";
               desc = "Screenshots";
